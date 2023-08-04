@@ -1,16 +1,19 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CountryDetails = (props) => {
   const { countryId } = useParams();
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const { countries } = props;
 
   useEffect(() => {
-    const foundCountry = countries.find(
-      (oneCountry) => oneCountry.alpha3Code === countryId
-    );
-    setSelectedCountry(foundCountry);
+    // https://ih-countries-api.herokuapp.com/countries/USA
+    const fetchedCountries = axios
+      .get(`https://ih-countries-api.herokuapp.com/countries/${countryId}`)
+      .then((response) => {
+        setSelectedCountry(response.data);
+      })
+      .catch((err) => console.log(err));
   }, [countryId]);
 
   function getFlagEmoji(countryCode) {
@@ -49,7 +52,7 @@ const CountryDetails = (props) => {
                   <ul>
                     {selectedCountry.borders.map((country) => {
                       return (
-                        <li style={{listStyleType:"none"}}>
+                        <li style={{ listStyleType: 'none' }}>
                           <Link key={country} to={`/${country}`}>
                             {country}
                           </Link>
