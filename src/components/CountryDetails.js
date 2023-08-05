@@ -52,8 +52,8 @@ const CountryDetails = (props) => {
                   <ul>
                     {selectedCountry.borders.map((country) => {
                       return (
-                        <li style={{ listStyleType: 'none' }}>
-                          <Link key={country} to={`/${country}`}>
+                        <li key={country} style={{ listStyleType: 'none' }}>
+                          <Link  to={`/${country}`}>
                             {country}
                           </Link>
                         </li>

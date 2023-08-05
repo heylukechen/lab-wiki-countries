@@ -26,6 +26,7 @@ function App() {
       <NavBar />
       <div className="container">
         <div className="row">
+        {/* create a new compoment like HomePage and it can just empty but point "/" to this componet */}
           <CountriesList countries={countries} />
           <Routes>
             <Route
